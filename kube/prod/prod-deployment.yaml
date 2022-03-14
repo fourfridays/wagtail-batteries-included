@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prod-wbi-app
+  labels:
+    app: wagtail-batteries-included
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wagtail-batteries-included
+  template:
+    metadata:
+      labels:
+        app: wagtail-batteries-included
+    spec:
+      initContainers:
+        - name: migrate
+          image: ghcr.io/fourfridays/wagtail-batteries-included:latest
+          imagePullPolicy: Always
+          command: ["python", "manage.py", "migrate"]
+          envFrom:
+          - secretRef:
+              name: secret
+      containers:
+        - image: ghcr.io/fourfridays/wagtail-batteries-included:latest
+          name: wagtail-batteries-included
+          envFrom:
+          - secretRef:
+              name: secret
+          - configMapRef:
+              name: config
+          ports:
+            - containerPort: 8080
+              name: gunicorn
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc
+  labels:
+    app: wagtail-batteries-included
+spec:
+  selector:
+    app: wagtail-batteries-included
+  ports:
+    - port: 8088
+      targetPort: 8080
+  type: ClusterIP

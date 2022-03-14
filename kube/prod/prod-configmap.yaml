@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config
+data:
+  DOMAIN_ALIASES: "wbi.fourfridays.com"
+  DJANGO_LOGLEVEL: "info"
+  WAGTAIL_SITE_NAME: "Wagtail Batteries Included"
+  CSRF_TRUSTED_ORIGINS: "https://wbi.fourfridays.com"
