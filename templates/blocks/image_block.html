@@ -1,0 +1,13 @@
+{% load wagtailimages_tags %}
+
+<figure>
+    {% image self.image width-900 format-webp as webp_theimage %}
+    {% image self.image width-900 as theimage %}
+        <picture>
+            <source srcset="{{ webp_theimage.url }}" type="image/webp">
+            <img class="img-fluid {% if self.border == True %}img-thumbnail{% endif %}{% if self.alignment != 'center' %} float-{{ self.alignment }} {% else %} mx-auto d-block{% endif %}" src="{{ theimage.url }}" width="{{ theimage.width }}" height="{{ theimage.height }}" alt="{{ theimage.alt }}" />
+        </picture>
+    {% if self.caption or self.attribution %}
+        <figcaption>{{ self.caption }} - {{ self.attribution }}</figcaption>
+    {%endif %}
+</figure>

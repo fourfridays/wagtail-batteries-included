@@ -1,0 +1,9 @@
+<article class="text-center {% if self.alignment != 'center' %}text-sm-{{ self.alignment }} {% endif %}">
+    <div class="container">
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-12 col-sm-10 col-sm-offset-1">
+               {% include "includes/streamfield.html" with content=self.column only %}
+            </div>
+        </div>
+    </div>
+</article>

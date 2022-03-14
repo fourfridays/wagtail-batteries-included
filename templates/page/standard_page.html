@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+{% block body_class %}{{ self.slug }}{% endblock %}
+
+{% block content %}
+    <!-- BODY -->
+    {% for block in page.body %}
+        {{ block }}
+    {% endfor %}
+{% endblock %}
