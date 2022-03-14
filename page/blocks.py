@@ -100,10 +100,11 @@ class IconBlock(StructBlock):
     ])
     name = CharBlock(max_length=25, help_text='25 character limit')
     size = ChoiceBlock(choices = [
+        ('xs', 'Extra Small'),
         ('sm', 'Small'),
-        ('md', 'Medium'),
         ('lg', 'Large'),
-        ('xl', 'Extra Large')
+        ('xl', 'Extra Large'),
+        ('2xl', 'Double XL')
     ])
     font_awesome_icon_choice = ChoiceBlock([
         ('solid', 'Solid'),
