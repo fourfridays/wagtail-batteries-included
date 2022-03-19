@@ -1,8 +1,0 @@
-name: CI/CD DEV
-on:
-  push:
-    branches:
-      - 'ci-cd-pipeline'
-    paths-ignore:
-      - '**.md'
-  workflow_dispatch: 
