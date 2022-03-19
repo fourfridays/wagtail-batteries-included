@@ -74,7 +74,7 @@ jobs:
               linux/arm64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ github.repository }}:master
+            ${{ env.REGISTRY }}/${{ github.repository }}:latest
             ${{ env.REGISTRY }}/${{ github.repository }}:arm64
             ${{ env.REGISTRY }}/${{ github.repository }}:${{ github.sha }}
 
