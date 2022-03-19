@@ -1,4 +1,4 @@
-[![MASTER](https://github.com/fourfridays/wagtail-batteries-included/actions/workflows/master.yaml/badge.svg?event=push)](https://github.com/fourfridays/wagtail-batteries-included/actions/workflows/master.yaml)
+[![MASTER](https://github.com/fourfridays/wagtail-batteries-included/actions/workflows/master.yaml/badge.svg?event=push)](https://github.com/fourfridays/wagtail-batteries-included/actions/workflows/master.yaml) [![DEV](https://github.com/fourfridays/wagtail-batteries-included/actions/workflows/dev.yaml/badge.svg?branch=dev&event=push)](https://github.com/fourfridays/wagtail-batteries-included/actions/workflows/dev.yaml)
 
 View demo website running at: https://wbi.fourfridays.com/
 
