@@ -81,17 +81,17 @@ jobs:
       - name: 'Current running ingress'
         id: ingress
         run: |
-          echo "::set-output name=name::$(kubectl get ingress -n ${{ secrets.K8_NAME_SPACE }} -o=jsonpath='{.items[0].metadata.name}')"
+          echo "::set-output name=name::$(kubectl get ingress -n ${{ secrets.K8_DEV_NAME_SPACE }} -o=jsonpath='{.items[0].metadata.name}')"
 
       - name: 'Deploy to K8s Deployment'
         run: |
-          kubectl -n ${{ secrets.K8_NAME_SPACE }} apply -f ./kube/dev/dev-configmap.yaml
-          kubectl -n ${{ secrets.K8_NAME_SPACE }} apply -f ./kube/dev/dev-deployment.yaml
+          kubectl -n ${{ secrets.K8_DEV_NAME_SPACE }} apply -f ./kube/dev/dev-configmap.yaml
+          kubectl -n ${{ secrets.K8_DEV_NAME_SPACE }} apply -f ./kube/dev/dev-deployment.yaml
 
       - name: 'Check for running ingress'
         if: "!contains(steps.ingress.outputs.name, 'dev')"
-        run: kubectl -n ${{ secrets.K8_NAME_SPACE }} apply -f ./kube/dev/dev-ingress.yaml
+        run: kubectl -n ${{ secrets.K8_DEV_NAME_SPACE }} apply -f ./kube/dev/dev-ingress.yaml
 
       - name: 'Restart Kubernetes App'
         run: |
-          kubectl -n ${{ secrets.K8_NAME_SPACE }} rollout restart deployment ${{ secrets.K8_APP_NAME }}
+          kubectl -n ${{ secrets.K8_DEV_NAME_SPACE }} rollout restart deployment ${{ secrets.K8_DEV_APP_NAME }}
