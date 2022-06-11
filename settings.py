@@ -8,12 +8,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 INSTALLED_APPS = [
     'page',
-    'django.contrib.sitemaps',
     'fontawesomefree',
-    'wagtail.contrib.table_block',
 
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
+    'wagtail.contrib.table_block',
     'wagtail.embeds',
     'wagtail.sites',
     'wagtail.users',
@@ -31,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.sitemaps',
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
@@ -93,10 +93,20 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Los_Angeles'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
+
+AWS_S3_OBJECT_PARAMETERS = {
+    'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+    'CacheControl': 'max-age=94608000',
+}
+AWS_S3_ACCESS_KEY_ID = os.environ.get('DEFAULT_STORAGE_DSN')
+AWS_S3_SECRET_ACCESS_KEY = os.environ.get('AWS_S3_SECRET_ACCESS_KEY')
+AWS_S3_REGION_NAME = os.environ.get('AWS_S3_REGION_NAME')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_ENDPOINT_URL = os.environ.get('AWS_S3_ENDPOINT_URL')
 
 
 # Static files (CSS, JavaScript, Images)
@@ -111,24 +121,28 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Media files
-# DEFAULT_FILE_STORAGE is configured using DEFAULT_STORAGE_DSN
-DEFAULT_STORAGE_DSN = os.environ.get('DEFAULT_STORAGE_DSN')
-# dsn_configured_storage_class() requires the name of the setting
-DefaultStorageClass = dsn_configured_storage_class('DEFAULT_STORAGE_DSN')
+DEBUG = os.environ.get('DJANGO_DEBUG') == "True"
 
-# Django's DEFAULT_FILE_STORAGE requires the class name
-DEFAULT_FILE_STORAGE = 'settings.DefaultStorageClass'
+# Media files
+if DEBUG == True:
+    # DEFAULT_FILE_STORAGE is configured using DEFAULT_STORAGE_DSN
+    DEFAULT_STORAGE_DSN = 'file:///data/media/?url=%2Fmedia%2F'
+    # dsn_configured_storage_class() requires the name of the setting
+    DefaultStorageClass = dsn_configured_storage_class('DEFAULT_STORAGE_DSN')
+    # Django's DEFAULT_FILE_STORAGE requires the class name
+    DEFAULT_FILE_STORAGE = 'settings.DefaultStorageClass'
+else:
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 MEDIA_ROOT = os.path.join('/data/media')
 MEDIA_URL = 'media/'
 
 # Wagtail settings
 
-WAGTAIL_SITE_NAME = os.environ.get('WAGTAIL_SITE_NAME', default='wagtail_batteries_included')
+WAGTAIL_SITE_NAME = os.environ.get('WAGTAIL_SITE_NAME', default='Wagtail Batteries Included')
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
-BASE_URL = 'http://example.com'
+BASE_URL = os.environ.get('BASE_URL', default='localhost')
 
 DEBUG = os.environ.get('DJANGO_DEBUG') == "True"
 DOMAIN_ALIASES = [
