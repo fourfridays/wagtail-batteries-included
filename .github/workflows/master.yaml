@@ -17,6 +17,9 @@ env:
 jobs:
   build:
     runs-on: self-hosted
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: 'Checkout'
         uses: actions/checkout@v2
@@ -50,12 +53,18 @@ jobs:
       #     echo "${{ secrets.KUBECONFIG }}" > /tmp/.kube/config
       #     echo "KUBECONFIG=/tmp/.kube/config" >> $GITHUB_ENV
 
-      # - name: 'Log in to the Container registry'
-      #   uses: docker/login-action@v1
-      #   with:
-      #     registry: ${{ env.REGISTRY }}
-      #     username: ${{ github.actor }}
-      #     password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: 'Log in to the Container registry'
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
       - name: Cache pip
         uses: actions/cache@v2
@@ -74,9 +83,10 @@ jobs:
               linux/arm64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ github.repository }}:latest
-            ${{ env.REGISTRY }}/${{ github.repository }}:arm64
-            ${{ env.REGISTRY }}/${{ github.repository }}:${{ github.sha }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:arm64
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          labels: ${{ steps.meta.outputs.labels }}
 
       - name: 'Current running ingress'
         id: ingress
