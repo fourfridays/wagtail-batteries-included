@@ -4,7 +4,7 @@ from django.db import models
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
-from wagtail.core.blocks import (
+from wagtail.blocks import (
     BooleanBlock, CharBlock, ChoiceBlock, DateBlock, FieldBlock, IntegerBlock, PageChooserBlock, RawHTMLBlock, RichTextBlock, StreamBlock, StructBlock, TextBlock, URLBlock
 )
 from wagtail.snippets.blocks import SnippetChooserBlock

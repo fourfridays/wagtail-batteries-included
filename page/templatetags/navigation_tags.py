@@ -1,7 +1,7 @@
 # Code copied from: https://github.com/wagtail/bakerydemo/blob/master/bakerydemo/base/templatetags/navigation_tags.py
 from django import template
 
-from wagtail.core.models import Page, Site
+from wagtail.models import Page, Site
 
 
 register = template.Library()

@@ -10,9 +10,9 @@ asgiref==3.5.0
     # via django
 beautifulsoup4==4.9.3
     # via wagtail
-boto3==1.20.54
+boto3==1.23.3
     # via -r requirements.in
-botocore==1.23.54
+botocore==1.26.10
     # via
     #   boto3
     #   s3transfer
@@ -22,10 +22,12 @@ charset-normalizer==2.0.12
     # via requests
 dj-database-url==0.5.0
     # via -r requirements.in
-django==4.0.2
+django==4.0.4
     # via
     #   -r requirements.in
     #   django-filter
+    #   django-modelcluster
+    #   django-permissionedforms
     #   django-storage-url
     #   django-storages
     #   django-taggit
@@ -34,7 +36,9 @@ django==4.0.2
     #   wagtail
 django-filter==21.1
     # via wagtail
-django-modelcluster==5.3
+django-modelcluster==6.0
+    # via wagtail
+django-permissionedforms==0.1
     # via wagtail
 django-storage-url==0.8.1
     # via -r requirements.in
@@ -50,7 +54,7 @@ draftjs-exporter==2.1.7
     # via wagtail
 et-xmlfile==1.1.0
     # via openpyxl
-fontawesomefree==6.0.0
+fontawesomefree==6.1.1
     # via -r requirements.in
 furl==2.1.3
     # via django-storage-url
@@ -70,7 +74,7 @@ openpyxl==3.0.9
     # via tablib
 orderedmultidict==1.0.1
     # via furl
-pillow==9.0.1
+pillow==9.1.1
     # via
     #   -r requirements.in
     #   wagtail
@@ -106,11 +110,11 @@ urllib3==1.26.8
     # via
     #   botocore
     #   requests
-wagtail==2.16.1
+wagtail==3.0
     # via -r requirements.in
 webencodings==0.5.1
     # via html5lib
-whitenoise==6.0.0
+whitenoise==6.1.0
     # via -r requirements.in
 willow==1.4.1
     # via wagtail

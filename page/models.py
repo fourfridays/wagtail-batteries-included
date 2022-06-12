@@ -1,10 +1,8 @@
 from django.db import models
 
-from wagtail.core.fields import StreamField
-from wagtail.core.models import Page
-from wagtail.admin.edit_handlers import (
-    StreamFieldPanel,
-)
+from wagtail.admin.panels import FieldPanel
+from wagtail.fields import StreamField
+from wagtail.models import Page
 
 from .blocks import ImageGridBlock, SingleColumnBlock, TwoColumnBlock, ThreeColumnBlock, FourColumnBlock, HeroImageBlock
 
@@ -17,8 +15,8 @@ class StandardPage(Page):
         ('three_columns', ThreeColumnBlock(group='COLUMNS')),
         ('four_columns', FourColumnBlock(group='COLUMNS')),
         ('image_grid', ImageGridBlock(icon='image', min_num=2, max_num=4, help_text='Minimum 2 blocks and a maximum of 4 blocks')),
-    ],default='')
+    ], use_json_field=True, default='')
 
     content_panels = Page.content_panels + [
-        StreamFieldPanel('body'),
+        FieldPanel('body'),
     ]
