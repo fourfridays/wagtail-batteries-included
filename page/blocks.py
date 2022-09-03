@@ -1,6 +1,7 @@
 from django import forms
 from django.db import models
 
+from wagtail.admin.panels import FieldPanel
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
@@ -8,7 +9,6 @@ from wagtail.blocks import (
     BooleanBlock, CharBlock, ChoiceBlock, DateBlock, FieldBlock, IntegerBlock, PageChooserBlock, RawHTMLBlock, RichTextBlock, StreamBlock, StructBlock, TextBlock, URLBlock
 )
 from wagtail.snippets.blocks import SnippetChooserBlock
-from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtail.contrib.table_block.blocks import TableBlock
 
 
@@ -90,7 +90,7 @@ class PersonDateBlock(StructBlock):
 
     panels = [
         # Use a SnippetChooserPanel because article.ArticleAuthor is registered as a snippet
-        SnippetChooserPanel("people"),
+        FieldPanel("people"),
     ]
 
 
