@@ -144,7 +144,6 @@ WAGTAIL_SITE_NAME = os.environ.get('WAGTAIL_SITE_NAME', default='Wagtail Batteri
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 WAGTAILADMIN_BASE_URL = os.environ.get('BASE_URL', default='localhost')
 
-DEBUG = os.environ.get('DJANGO_DEBUG') == "True"
 DOMAIN_ALIASES = [
     d.strip()
     for d in os.environ.get('DOMAIN_ALIASES', '').split(',')
