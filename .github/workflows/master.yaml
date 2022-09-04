@@ -95,12 +95,7 @@ jobs:
 
       - name: 'Deploy to K8s Deployment'
         run: |
-          kubectl -n ${{ secrets.K8_NAME_SPACE }} apply -f ./kube/prod/prod-configmap.yaml
-          kubectl -n ${{ secrets.K8_NAME_SPACE }} apply -f ./kube/prod/prod-deployment.yaml
-
-      - name: 'Check for running ingress'
-        if: "!contains(steps.ingress.outputs.name, 'prod')"
-        run: kubectl -n ${{ secrets.K8_NAME_SPACE }} apply -f ./kube/prod/prod-ingress.yaml
+          kubectl -n ${{ secrets.K8_NAME_SPACE }} apply -f ./kube/prod/
 
       - name: 'Restart Kubernetes App'
         run: |
