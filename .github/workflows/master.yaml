@@ -88,10 +88,10 @@ jobs:
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
           labels: ${{ steps.meta.outputs.labels }}
 
-      - name: 'Current running ingress'
-        id: ingress
-        run: |
-          echo "::set-output name=name::$(kubectl get ingress -n ${{ secrets.K8_NAME_SPACE }} -o=jsonpath='{.items[0].metadata.name}')"
+      # - name: 'Current running ingress'
+      #   id: ingress
+      #   run: |
+      #     echo "::set-output name=name::$(kubectl get ingress -n ${{ secrets.K8_NAME_SPACE }} -o=jsonpath='{.items[0].metadata.name}')"
 
       - name: 'Deploy to K8s Deployment'
         run: |
