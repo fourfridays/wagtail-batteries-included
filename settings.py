@@ -151,4 +151,6 @@ DOMAIN_ALIASES = [
 ]
 ALLOWED_HOSTS = DOMAIN_ALIASES
 CSRF_TRUSTED_ORIGINS = [os.environ.get('CSRF_TRUSTED_ORIGINS', default='http://localhost')]
+# Redirect to HTTPS by default disabled, unless explicitly enabled
+SECURE_SSL_REDIRECT = os.environ.get('SECURE_SSL_REDIRECT') == "True"
 SECRET_KEY = os.environ.get('SECRET_KEY', default='<a string of random characters>')
