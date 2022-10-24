@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: wagtail-batteries-included
+  name: wbi
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: wagtail-batteries-included
+      app: wbi
   template:
     metadata:
       labels:
-        app: wagtail-batteries-included
+        app: wbi
     spec:
       initContainers:
         - name: migrate
@@ -22,7 +22,7 @@ spec:
               name: secret
       containers:
         - image: ghcr.io/fourfridays/wagtail-batteries-included:latest
-          name: wagtail-batteries-included
+          name: wbi
           envFrom:
           - secretRef:
               name: secret
@@ -34,12 +34,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: wagtail-batteries-included
+  name: wbi
   labels:
-    app: wagtail-batteries-included
+    app: wbi
 spec:
   selector:
-    app: wagtail-batteries-included
+    app: wbi
   ports:
     - port: 8088
       targetPort: 8080
@@ -48,12 +48,10 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingress
-  namespace: wbi
+  name: ingress-nginx
   annotations:
-    kubernetes.io/ingress.class: traefik
-    traefik.ingress.kubernetes.io/router.entrypoints: web
-    traefik.ingress.kubernetes.io/router.tls: "true"
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
   rules:
   - host: wbi.fourfridays.com
@@ -63,55 +61,31 @@ spec:
           pathType: Prefix
           backend:
             service:
-              name: wagtail-batteries-included
+              name: wbi
               port:
                 number: 8088
   tls:
     - hosts:
         - wbi.fourfridays.com
       secretName: wbi-tls
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: app-tls
-  annotations:
-    kubernetes.io/ingress.class: traefik
-spec:
-  entryPoints:
-    - websecure
-  routes:
-    - kind: Rule
-      match: Host(`wbi.fourfridays.com`)
-      services:
-        - name: wagtail-batteries-included
-          port: 8088
-  tls: # This route uses TLS
-    secretName: wbi-tls
-    domains:
-    - main: wbi.fourfridays.com
-    certResolver: le # Uses our certificate resolver to get a certificate automatically!
-# --- nginx-ingress-deprecated
-# apiVersion: networking.k8s.io/v1
-# kind: Ingress
+# --- traefik-ingress-deprecated
+# apiVersion: traefik.containo.us/v1alpha1
+# kind: IngressRoute
 # metadata:
-#   name: ingress
+#   name: app-tls
 #   annotations:
-#     kubernetes.io/ingress.class: "nginx"
-#     cert-manager.io/cluster-issuer: "letsencrypt-prod"
+#     kubernetes.io/ingress.class: traefik
 # spec:
-#   tls:
-#   - hosts:
-#     - wbi.fourfridays.com
+#   entryPoints:
+#     - websecure
+#   routes:
+#     - kind: Rule
+#       match: Host(`wbi.fourfridays.com`)
+#       services:
+#         - name: wagtail-batteries-included
+#           port: 8088
+#   tls: # This route uses TLS
 #     secretName: wbi-tls
-#   rules:
-#   - host: wbi.fourfridays.com
-#     http:
-#       paths:
-#         - path: /
-#           pathType: Prefix
-#           backend:
-#             service:
-#               name: svc
-#               port:
-#                 number: 8088
+#     domains:
+#     - main: wbi.fourfridays.com
+#     certResolver: le # Uses our certificate resolver to get a certificate automatically!
