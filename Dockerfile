@@ -1,5 +1,5 @@
 # Use an official Python runtime based on Debian 10 "buster" as a parent image.
-FROM python:3.9.10-slim-buster
+FROM python:3.10.6-slim-bullseye
 
 # Set environment variables.
 # 1. Force Python stdout and stderr streams to be unbuffered.
@@ -28,5 +28,5 @@ RUN python manage.py collectstatic --noinput --clear
 # Port used by this container to serve HTTP.
 EXPOSE 8080
 
-# GUNICORN
-CMD ["gunicorn", "--bind", ":8080", "--workers", "3", "wsgi"]
+# UWSGI
+CMD uwsgi --http=0.0.0.0:80 --module=wsgi --ignore-sigpipe --ignore-write-errors --disable-write-exception
