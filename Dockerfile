@@ -1,5 +1,5 @@
 # Use an official Python runtime based on Debian 10 "buster" as a parent image.
-FROM python:3.10.6-slim-bullseye
+FROM python:3.11.3-slim-bullseye
 
 # Set environment variables.
 # 1. Force Python stdout and stderr streams to be unbuffered.
