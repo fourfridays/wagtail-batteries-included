@@ -1,0 +1,97 @@
+name: DEV
+
+on:
+  push:
+    branches:
+      - 'dev'
+    release:
+      types: [published, edited]
+    paths-ignore:
+      - '**.md'
+  workflow_dispatch:
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v2
+        with:
+          ref: 'dev'
+
+      - name: 'Set up QEMU'
+        uses: docker/setup-qemu-action@v1
+        with:
+          platforms: arm64
+
+      # - name: 'Install OCI CLI'
+      #   run: |
+      #     mkdir ~/.oci
+      #     echo "${{ secrets.OCI_CONFIG }}" > ~/.oci/config
+      #     echo "${{ secrets.OCI_KEY_FILE }}" > ~/.oci/oci_api_key.pem
+      #     curl -L -O https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh
+      #     chmod +x install.sh
+      #     ./install.sh --accept-all-defaults
+      #     echo "/home/runner/bin" >> $GITHUB_PATH
+      #     exec -l $SHELL
+      #     oci setup repair-file-permissions --file /home/runner/.oci/config
+      #     oci setup repair-file-permissions --file /home/runner/.oci/oci_api_key.pem
+
+      # - name: 'Install kubectl'
+      #   run: |
+      #     mkdir /tmp/.kube
+      #     curl -L -O "https://dl.k8s.io/release/v1.22.5/bin/linux/arm64/kubectl" -o kubectl
+      #     chmod +x kubectl
+      #     mv kubectl /usr/local/bin
+      #     echo "${{ secrets.KUBECONFIG }}" > /tmp/.kube/config
+      #     echo "KUBECONFIG=/tmp/.kube/config" >> $GITHUB_ENV
+
+      # - name: 'Log in to the Container registry'
+      #   uses: docker/login-action@v1
+      #   with:
+      #     registry: ${{ env.REGISTRY }}
+      #     username: ${{ github.actor }}
+      #     password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Cache pip
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          # If the requirements files change, the cache will not hit. 
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: 'Build and push'
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          platforms: |-
+              linux/arm64
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ github.repository }}:dev
+            ${{ env.REGISTRY }}/${{ github.repository }}:arm64
+            ${{ env.REGISTRY }}/${{ github.repository }}:${{ github.sha }}
+
+      - name: 'Current running ingress'
+        id: ingress
+        run: |
+          echo "::set-output name=name::$(kubectl get ingress -n ${{ secrets.K8_DEV_NAME_SPACE }} -o=jsonpath='{.items[0].metadata.name}')"
+
+      - name: 'Deploy to K8s Deployment'
+        run: |
+          kubectl -n ${{ secrets.K8_DEV_NAME_SPACE }} apply -f ./kube/dev/dev-configmap.yaml
+          kubectl -n ${{ secrets.K8_DEV_NAME_SPACE }} apply -f ./kube/dev/dev-deployment.yaml
+
+      - name: 'Check for running ingress'
+        if: "!contains(steps.ingress.outputs.name, 'dev')"
+        run: kubectl -n ${{ secrets.K8_DEV_NAME_SPACE }} apply -f ./kube/dev/dev-ingress.yaml
+
+      - name: 'Restart Kubernetes App'
+        run: |
+          kubectl -n ${{ secrets.K8_DEV_NAME_SPACE }} rollout restart deployment ${{ secrets.K8_DEV_APP_NAME }}
