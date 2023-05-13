@@ -1,12 +1,14 @@
 {% load navigation_tags wagtailcore_tags %}
 
 {% for menuitem in menuitems %}
-    <li class="nav-item{% if menuitem.active %} active{% endif %}{% if menuitem.show_dropdown %} dropdown{% endif %}">
-      {% if menuitem.show_dropdown %}
-          <a class="nav-link dropdown-toggle" href="#" id="{{ menuitem.title|lower|cut:' ' }}-navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ menuitem.title }}</a>
-              {% top_menu_children parent=menuitem %}
-      {% else %}
-          <a class="nav-link" href="{% pageurl menuitem %}" role="menuitem">{{ menuitem.title }} <span class="sr-only">(current)</span></a>
-      {% endif %}
-    </li>
+<li class="nav-item{% if menuitem.active %} active{% endif %}{% if menuitem.show_dropdown %} dropdown{% endif %}">
+    {% if menuitem.show_dropdown %}
+    <a class="nav-link dropdown-toggle" href="#" id="{{ menuitem.title|lower|cut:' ' }}-navbarDropdown" role="button"
+        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ menuitem.title }}</a>
+    {% top_menu_children parent=menuitem %}
+    {% else %}
+    <a class="nav-link" href="{% pageurl menuitem %}" role="menuitem">{{ menuitem.title }} <span
+            class="sr-only">(current)</span></a>
+    {% endif %}
+</li>
 {% endfor %}

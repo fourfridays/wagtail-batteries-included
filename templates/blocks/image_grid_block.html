@@ -5,10 +5,10 @@
         <div class="col-12">
             <hr>
             <div class="card-group">
-                {% for child in self %} 
-                    <div class="card border mr-2 p-2" style="background-color: #22272e;">
-                        {% if child.value.link %}
-                            <a class="text-black" href="{% pageurl child.value.link %}">
+                {% for child in self %}
+                <div class="card border mr-2 p-2" style="background-color: #22272e;">
+                    {% if child.value.link %}
+                    <a class="text-black" href="{% pageurl child.value.link %}">
                         {% endif %}
                         <h4 class="text-white p-2 mb-0"><small>{{ child.value.caption }}</small></h4>
                         {% image child.value.image fill-400x300-c100 format-webp as webp_grid_image %}
@@ -16,16 +16,17 @@
                         <figure class="overlay">
                             <picture>
                                 <source srcset="{{ webp_grid_image.url }}" type="image/webp">
-                                <img class="card-img img-fluid" src="{{ grid_image.url }}" alt="{{ child.value.image.title }}"/>
+                                <img class="card-img img-fluid" src="{{ grid_image.url }}"
+                                    alt="{{ child.value.image.title }}" />
                             </picture>
                         </figure>
                         {% if child.value.link %}
-                            </a>
-                        {% endif %}
-                        {% if child.value.description %}
-                            <p class="text-white px-3">{{ child.value.description }}</p>
-                        {% endif %}
-                    </div>
+                    </a>
+                    {% endif %}
+                    {% if child.value.description %}
+                    <p class="text-white px-3">{{ child.value.description }}</p>
+                    {% endif %}
+                </div>
                 {% endfor %}
             </div>
         </div>

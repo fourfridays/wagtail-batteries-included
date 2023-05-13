@@ -9,11 +9,14 @@ from wagtail.documents import urls as wagtaildocs_urls
 from wagtail.contrib.sitemaps.views import sitemap
 
 urlpatterns = [
-    path('django-admin/', admin.site.urls),
-    re_path(r'^robots\.txt', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
-    re_path(r'^sitemap\.xml$', sitemap),
-    path('admin/', include(wagtailadmin_urls)),
-    path('documents/', include(wagtaildocs_urls)),
+    path("django-admin/", admin.site.urls),
+    re_path(
+        r"^robots\.txt",
+        TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),
+    ),
+    re_path(r"^sitemap\.xml$", sitemap),
+    path("admin/", include(wagtailadmin_urls)),
+    path("documents/", include(wagtaildocs_urls)),
 ]
 
 
@@ -30,7 +33,6 @@ urlpatterns = urlpatterns + [
     # Wagtail's page serving mechanism. This should be the last pattern in
     # the list:
     path("", include(wagtail_urls)),
-
     # Alternatively, if you want Wagtail pages to be served from a subpath
     # of your site, rather than the site root:
     #    path("pages/", include(wagtail_urls)),

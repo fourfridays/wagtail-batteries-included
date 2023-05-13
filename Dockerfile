@@ -12,7 +12,7 @@ RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-r
     libjpeg62-turbo-dev \
     zlib1g-dev \
     libwebp-dev \
- && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/*
 
 # set the working directory
 WORKDIR /app

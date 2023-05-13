@@ -6,22 +6,22 @@
     <figure>
         <picture>
             <source srcset="{{ webp_heroimage.url }}" type="image/webp">
-            <img class="img-fluid" src="{{ heroimage.url }}" alt="{{ self.hero_image.title }}"/>
+            <img class="img-fluid" src="{{ heroimage.url }}" alt="{{ self.hero_image.title }}" />
         </picture>
         {% if self.hero_heading or self.hero_caption or self.hero_photo_credit %}
-            <figcaption class="p-3">
-                {% if self.hero_heading %}
-                    <h2>{{ self.hero_heading }}</h2>
-                {% endif %}
-                {% if self.hero_message %}
-                    <p class="d-none d-sm-block"><small>{{ self.hero_message }}</small></p>
-                {% endif %}
-            </figcaption>
-            {% if self.hero_photo_credit %}
-                <div class="photo-credit d-none d-sm-block p-1">
-                    <small><b>Photo:</b> {{ self.hero_photo_credit }}</small>
-                </div>
+        <figcaption class="p-3">
+            {% if self.hero_heading %}
+            <h2>{{ self.hero_heading }}</h2>
             {% endif %}
+            {% if self.hero_message %}
+            <p class="d-none d-sm-block"><small>{{ self.hero_message }}</small></p>
+            {% endif %}
+        </figcaption>
+        {% if self.hero_photo_credit %}
+        <div class="photo-credit d-none d-sm-block p-1">
+            <small><b>Photo:</b> {{ self.hero_photo_credit }}</small>
+        </div>
+        {% endif %}
         {% endif %}
     </figure>
 </div>
