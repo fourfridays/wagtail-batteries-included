@@ -67,13 +67,6 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      - name: Cache pip
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11.3'
-          architecture: x64
-          cache: 'pip'
-
       - name: 'Build and push'
         uses: docker/build-push-action@v3
         with:
