@@ -8,4 +8,4 @@ data:
   WAGTAILADMIN_BASE_URL: "https://wbi.fourfridays.com"
   WAGTAIL_SITE_NAME: "Wagtail Batteries Included"
   CSRF_TRUSTED_ORIGINS: "https://wbi.fourfridays.com"
-  DJANGO_DEBUG: True
+  DJANGO_DEBUG: "True"
