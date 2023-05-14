@@ -68,13 +68,10 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
       - name: Cache pip
-        uses: actions/cache@v3
+        uses: actions/setup-python@v4
         with:
-          path: ~/.cache/pip
-          # If the requirements files change, the cache will not hit. 
-          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
+          python-version: '3.11.3'
+          cache: 'pip'
 
       - name: 'Build and push'
         uses: docker/build-push-action@v3
