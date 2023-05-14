@@ -2,19 +2,17 @@
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark p-0" role="navigation">
     <a class="navbar-brand" href="/" title="{{ current_site.site_name }}">{{ current_site.site_name }}</a>
-    <button class="mx-2 navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="mx-2 navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
     {% block main_navigation %}
-    <div class="collapse navbar-collapse" id="navbarSupportedContent" role="navigation"
-        aria-label="Primary site navigation">
-        <ul class="navbar-nav me-auto">
-            {# main_menu is defined in pages/templatetags/navigation_tags.py #}
-            {% get_site_root as site_root %}
-            {% top_menu parent=site_root calling_page=self %}
-        </ul>
-    </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" role="navigation" aria-label="Primary site navigation">
+            <ul class="navbar-nav me-auto">
+                {# main_menu is defined in pages/templatetags/navigation_tags.py #}
+                {% get_site_root as site_root %}
+                {% top_menu parent=site_root calling_page=self %}
+            </ul>
+        </div>
     {% endblock %}
 </nav>
