@@ -9,6 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 INSTALLED_APPS = [
     'page',
     'fontawesomefree',
+    'users',
 
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
@@ -153,3 +154,6 @@ DOMAIN_ALIASES = [
 ALLOWED_HOSTS = DOMAIN_ALIASES
 CSRF_TRUSTED_ORIGINS = [os.environ.get('CSRF_TRUSTED_ORIGINS', default='http://localhost')]
 SECRET_KEY = os.environ.get('SECRET_KEY', default='<a string of random characters>')
+
+# Custom User model
+AUTH_USER_MODEL = "users.User"
