@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+{% block title %}Articles Tagged: {{ tag }} | Umair Abbasi{% endblock %}
+{% block extra_meta %}<meta name="robots" content="noindex">{% endblock %}
+{% load wagtailcore_tags wagtailimages_tags %}
+{% block body_class %}article-tag-listing-page{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="my-3 text-center">Articles Tagged: {{ tag }}</h1>
+        <div class="row">
+            {% if articles %}
+                {% for post in articles %}
+                    {% if forloop.counter <= 2 %}
+                        <div class="col-md-6">
+                            <article>
+                                {% if post.image %}
+                                    {% image post.image fill-540x229-c100 as heroimage %}
+                                    {% image post.image fill-540x229-c100 format-webp as webp_heroimage %}
+                                    <a href="{{ post.url }}">
+                                        <picture>
+                                            <source srcset="{{ webp_heroimage.url }}" type="image/webp">
+                                            <img class="mb-2 img-fluid" {{ heroimage.attrs }}/>
+                                        </picture>
+                                    </a>
+                                {% endif %}
+                                <a href="{{ post.url }}"><h2 class="mb-0 text-uppercase">{{ post.title }}</h2></a>
+                                <p class="small">
+                                    {{ post.date_published }}        
+                                    {% if post.category %}
+                                            - <span style="text-transform: uppercase;">{{ post.category.name }}</span>
+                                    {% endif %}
+                                </p>
+                            </article>
+                        </div>
+                    {% endif %}
+
+                    {% if forloop.counter == 2 %}
+                        </div>
+                        <div class="row">
+                            <div class="col d-none d-md-block"><hr></div>
+                        </div>
+                        <div class="row">
+                    {% endif %}
+
+                    {% if forloop.counter >= 3 and forloop.counter <= 4 %}
+                        <div class="col-md-6">
+                            <article>
+                                {% if post.hero_image %}
+                                    {% image post.hero_image fill-540x229-c100 as heroimage %}
+                                    {% image post.hero_image fill-540x229-c100 format-webp as webp_heroimage %}
+                                    <a href="{{ article.url }}">
+                                        <picture>
+                                            <source srcset="{{ webp_heroimage.url }}" type="image/webp">
+                                            <img class="mb-2 img-fluid" {{ heroimage.attrs }}/>
+                                        </picture>
+                                    </a>
+                                {% endif %}
+                                <h2 class="mb-0 text-uppercase">{{ article.title }}</h2>
+                                <p class="small">
+                                    {{ post.date_published }}        
+                                    {% if post.category %}
+                                            - <span style="text-transform: uppercase;">{{ post.category.name }}</span>
+                                    {% endif %}
+                                </p>
+                            </article>
+                        </div>
+                    {% endif %}
+
+                    {% if forloop.counter == 4 %}
+                        </div>
+                        <div class="row">
+                            <div class="col d-none d-md-block"><hr></div>
+                        </div>
+                        <div class="row">
+                    {% endif %}
+
+                    {% if forloop.counter >= 5 and forloop.counter <= 6 %}
+                        <div class="col-md-6">
+                            <article>
+                                {% if post.hero_image %}
+                                    {% image post.hero_image fill-540x229-c100 as heroimage %}
+                                    {% image post.hero_image fill-540x229-c100 format-webp as webp_heroimage %}
+                                    <a href="{{ post.url }}">
+                                        <picture>
+                                            <source srcset="{{ webp_heroimage.url }}" type="image/webp">
+                                            <img class="mb-2 img-fluid" {{ heroimage.attrs }}/>
+                                        </picture>
+                                    </a>
+                                {% endif %}
+                                <h2 class="mb-0 text-uppercase">{{ post.title }}</h2>
+                                <p class="small">
+                                    {{ post.date_published }}        
+                                    {% if post.category %}
+                                            - <span style="text-transform: uppercase;">{{ post.category.name }}</span>
+                                    {% endif %}
+                                </p>
+                            </article>
+                        </div>
+                    {% endif %}
+
+                    {% if forloop.counter == 6 %}
+                        </div>
+                        <div class="row">
+                            <div class="col d-none d-md-block"><hr></div>
+                        </div>
+                        <div class="row">
+                    {% endif %}
+
+                    {% if forloop.counter >= 7 and forloop.counter <= 8 %}
+                        <div class="col-md-6">
+                            <article>
+                                {% if post.hero_image %}
+                                    {% image post.hero_image fill-540x229-c100 as heroimage %}
+                                    {% image post.hero_image fill-540x229-c100 format-webp as webp_heroimage %}
+                                    <a href="{{ post.url }}">
+                                        <picture>
+                                            <source srcset="{{ webp_heroimage.url }}" type="image/webp">
+                                            <img class="mb-2 img-fluid" {{ heroimage.attrs }}/>
+                                        </picture>
+                                    </a>
+                                {% endif %}
+                                <h2 class="mb-0 text-uppercase">{{ post.title }}</h2>
+                                <p class="small">
+                                    {{ post.date_published }}        
+                                    {% if post.category %}
+                                            - <span style="text-transform: uppercase;">{{ post.category.name }}</span>
+                                    {% endif %}
+                                </p>
+                            </article>
+                        </div>
+                    {% endif %}
+
+                    {% if forloop.counter == 8 %}
+                        </div>
+                        <div class="row"><h2 class="my-4 text-uppercase text-center">Older Articles</h2></div>
+                        <div class="row">
+                    {% endif %}
+
+                    {% if forloop.counter >= 9 %}
+                        <div class="col-md-3">
+                            <h5 class="text-uppercase"><a href="{{ post.url }}/">{{ post.title }}</a></h5>
+                            <p class="small">
+                                {{ post.date }}        
+                                {% if post.categories.all %}
+                                    {% for cat in post.categories.all %}
+                                       - <span style="text-transform: uppercase;">{{ cat.category.name }}</span> {% if not forloop.last %}, {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            </p>
+                            <hr class="d-block d-sm-none">
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <p>There are no articles tagged with {{ tag }}.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

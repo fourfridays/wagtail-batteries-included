@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Blog Article Tags | Umair Abbasi{% endblock %}
+{% block extra_meta %}<meta name="robots" content="noindex">{% endblock %}
+{% load wagtailcore_tags wagtailimages_tags %}
+{% block body_class %}blog-tags-index{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="my-3 text-center">All Article Tags</h1>
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="list-inline">
+                    {% regroup tags by tag as tag_list %}
+                    {% for tag in tag_list %}
+                        <li class="list-inline-item"><i class="fas fa-tag swatch-red" aria-hidden="true"></i> <a href="/articles/tags/{{ tag.grouper.slug }}/">{{ tag.grouper }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
