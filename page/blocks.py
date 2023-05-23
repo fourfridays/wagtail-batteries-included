@@ -94,31 +94,6 @@ class PersonDateBlock(StructBlock):
     ]
 
 
-class IconBlock(StructBlock):
-    icon = ChoiceBlock([
-        ('font-awesome', 'Font Awesome'),
-    ])
-    name = CharBlock(max_length=25, help_text='25 character limit')
-    size = ChoiceBlock(choices = [
-        ('xs', 'Extra Small'),
-        ('sm', 'Small'),
-        ('lg', 'Large'),
-        ('xl', 'Extra Large'),
-        ('2xl', 'Double XL')
-    ])
-    font_awesome_icon_choice = ChoiceBlock([
-        ('solid', 'Solid'),
-        ('regular', 'Regular'),
-        ('light', 'Light'),
-        ('brand', 'Brand')
-    ], required=False)
-    alignment = AlignmentBlock(default='start')
-
-    class Meta:
-        icon = 'wagtail'
-        template = 'blocks/icon_block.html'
-
-
 class ImageBlock(StructBlock):
     """
     Custom `StructBlock` for utilizing images with associated caption and
@@ -187,7 +162,6 @@ class BaseStreamBlock(StreamBlock):
         help_text='Insert an embed URL e.g https://www.youtube.com/embed/SGJFWirQ3ks',
         icon='code',
         template='blocks/embed_block.html')
-    icon_block = IconBlock()
     table = TableBlock(template='includes/table.html')
     raw_html = AlignedRAWHTMLBlock()
 
