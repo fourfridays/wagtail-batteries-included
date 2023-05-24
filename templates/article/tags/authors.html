@@ -3,8 +3,6 @@
 
 {% for author in authors %}
     {% image author.image fill-50x50 as img %}
-    <p>
-        <img class="rounded-circle" src="{{ img.url }}" alt="{{ author.first_name }} {{ author.last_name }}"/>
-        {{ author.first_name }} {{ author.last_name }}
-    </p>
+    <img class="rounded-circle" src="{{ img.url }}" alt="{{ author.first_name }} {{ author.last_name }}"/>
+    {{ author.first_name }} {{ author.last_name }}
 {% endfor %}

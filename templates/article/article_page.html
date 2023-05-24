@@ -11,15 +11,18 @@
         <div class="text-center">
             <h1>{{ self.title }}</h1>
             <p>{{ self.date_published }}</p>
-            <h2>Categories</h2>
-            <ul class="list-unstyled">
-                {% for cat in self.categories.all %}
-                    <li>
+
+            {% if self.categories.all %}
+                <p><span class="fw-bold">Categories:</span>
+                    {% for cat in self.categories.all %}
                         {{ cat.name }}
-                    </li>
-                {% endfor %}
-            </ul>
-            {% authors %}
+                    {% endfor %}
+                </p>
+            {% endif %}
+
+            <p><span class="fw-bold">Authors:</span>
+                {% authors %}
+            </p>
         </div>
     </div>
 
