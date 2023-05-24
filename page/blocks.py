@@ -20,6 +20,27 @@ from wagtail.blocks import (
 from wagtail.snippets.blocks import SnippetChooserBlock
 from wagtail.contrib.table_block.blocks import TableBlock
 
+COLOR_PRIMARY = "primary"
+COLOR_SECONDARY = "secondary"
+COLOR_TERTIARY = "tertiary"
+COLOR_SUCCESS = "success"
+COLOR_DANGER = "danger"
+COLOR_WARNING = "warning"
+COLOR_INFO = "info"
+COLOR_LIGHT = "light"
+COLOR_DARK = "dark"
+
+COLOR_CHOICES = (
+    (COLOR_PRIMARY, "Primary"),
+    (COLOR_SECONDARY, "Secondary"),
+    (COLOR_TERTIARY, "Tertiary"),
+    (COLOR_SUCCESS, "Success"),
+    (COLOR_DANGER, "Danger"),
+    (COLOR_WARNING, "Warning"),
+    (COLOR_INFO, "Info"),
+    (COLOR_LIGHT, "Light"),
+    (COLOR_DARK, "Dark"),
+)
 
 class AlignmentBlock(ChoiceBlock):
     choices = [("start", "Left"), ("center", "Center"), ("end", "Right")]
@@ -40,14 +61,7 @@ class ButtonBlock(StructBlock):
     internal_link = PageChooserBlock(required=False)
     external_link = URLBlock(required=False)
     color = ChoiceBlock(
-        [
-            ("primary", "Primary"),
-            ("secondary", "Secondary"),
-            ("dark-brown", "Dark Brown"),
-            ("white-smoke", "White Smoke"),
-            ("concrete", "Concrete"),
-            ("aqua-island", "Aqua Island"),
-        ]
+        choices=COLOR_CHOICES,
     )
 
     class Meta:
