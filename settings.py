@@ -110,6 +110,7 @@ AWS_S3_OBJECT_PARAMETERS = {
 }
 AWS_S3_REGION_NAME = os.environ.get("AWS_S3_REGION_NAME", default=None)
 AWS_S3_ENDPOINT_URL = os.environ.get("AWS_S3_ENDPOINT_URL", default=None)
+AWS_S3_FILE_OVERWRITE = False
 
 
 # Static files (CSS, JavaScript, Images)
