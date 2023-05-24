@@ -1,7 +1,7 @@
 {
   "name": "Umair Abbasi",
   "version": "1.0.0",
-  "description": "Package file for wagtail_batteries_inclded website.",
+  "description": "Package file for wagtail batteries inclded website hosted at https://wbi.fourfridays.com",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
