@@ -29,4 +29,4 @@ RUN python manage.py collectstatic --noinput --clear
 EXPOSE 8080
 
 # UWSGI
-CMD uwsgi --http=0.0.0.0:8080 --module=wsgi --ignore-sigpipe --ignore-write-errors --disable-write-exception
+CMD uwsgi --http=0.0.0.0:8080 --module=wsgi --ignore-sigpipe --ignore-write-errors --disable-write-exception file:logfile=/tmp/uwsgi.log,maxsize=2000000
