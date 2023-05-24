@@ -1,5 +1,4 @@
 from django import forms
-from django.db import models
 
 from wagtail.admin.panels import FieldPanel
 from wagtail.documents.blocks import DocumentChooserBlock
@@ -32,17 +31,6 @@ class AlignedRAWHTMLBlock(StructBlock):
 
     class Meta:
         template = "blocks/aligned_raw_html_block.html"
-
-
-class BackgroundColorBlock(FieldBlock):
-    field = forms.ChoiceField(
-        choices=(
-            ("normal", "Normal"),
-            ("white-smoke", "White Smoke"),
-            ("aqua-island", "Aqua Island"),
-            ("concrete", "Concrete"),
-        )
-    )
 
 
 class ButtonBlock(StructBlock):
@@ -219,7 +207,6 @@ class BaseStreamBlock(StreamBlock):
 class SingleColumnBlock(StructBlock):
     column = BaseStreamBlock()
     alignment = AlignmentBlock(default="start", required=False)
-    # background_color = BackgroundColorBlock(default='normal', required=False)
 
     class Meta:
         label = "Single Column"
@@ -230,7 +217,6 @@ class TwoColumnBlock(StructBlock):
     left_column = BaseStreamBlock()
     right_column = BaseStreamBlock()
     alignment = AlignmentBlock(default="start", required=False)
-    # background_color = BackgroundColorBlock(default='normal', required=False)
 
     class Meta:
         label = "Two Columns"
@@ -242,7 +228,6 @@ class ThreeColumnBlock(StructBlock):
     middle_column = BaseStreamBlock()
     right_column = BaseStreamBlock()
     alignment = AlignmentBlock(default="start", required=False)
-    # background_color = BackgroundColorBlock(default='normal', required=False)
 
     class Meta:
         label = "Three Columns"
@@ -255,7 +240,6 @@ class FourColumnBlock(StructBlock):
     right_column_1 = BaseStreamBlock()
     right_column_2 = BaseStreamBlock()
     alignment = AlignmentBlock(default="start", requirement=False)
-    # background_color = BackgroundColorBlock(default='normal', required=False)
 
     class Meta:
         label = "Four Columns"
