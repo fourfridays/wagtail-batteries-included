@@ -21,12 +21,6 @@
                 {{ child.value.html }}
             </div>
 
-        <!-- ICON -->
-        {% elif child.block_type == 'icon' %}
-            <div class="icon {{ child.value.alignment }}">
-                <i class="{% if child.value.font_awesome_icon_choice == 'brand' %}fab{% else %}fas{% endif %} {{ child.value.font_awesome_icon_name }} fa-{{ child.value.font_awesome_icon_size }}" aria-hidden="true"></i>
-            </div>
-
         <!-- SMALL TEXT -->
         {% elif child.block_type == 'small_text' %}
             <small>{{ child }}</small>
