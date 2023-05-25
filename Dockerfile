@@ -29,7 +29,7 @@ RUN python manage.py collectstatic --noinput --clear
 EXPOSE 8080
 
 # GUNICORN
-CMD ["gunicorn", "--bind", ":8080", "--workers", "3", "wsgi"]
+CMD ["gunicorn", "--bind", ":8080", "--workers", "3", "--threads", "4", "--worker-class", "gevent", "--max-requests-jitter", " 2000", "--max-requests", "1500", "wsgi"]
 
 # UWSGI
 # CMD uwsgi --http=0.0.0.0:8080 --module=wsgi --ignore-sigpipe --ignore-write-errors --disable-write-exception --logger file:logfile=/tmp/uwsgi.log,maxsize=2000000
