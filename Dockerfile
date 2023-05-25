@@ -28,5 +28,8 @@ RUN python manage.py collectstatic --noinput --clear
 # Port used by this container to serve HTTP.
 EXPOSE 8080
 
+# GUNICORN
+CMD ["gunicorn", "--bind", ":8080", "--workers", "3", "wsgi"]
+
 # UWSGI
-CMD uwsgi --http=0.0.0.0:8080 --module=wsgi --ignore-sigpipe --ignore-write-errors --disable-write-exception --logger file:logfile=/tmp/uwsgi.log,maxsize=2000000
+# CMD uwsgi --http=0.0.0.0:8080 --module=wsgi --ignore-sigpipe --ignore-write-errors --disable-write-exception --logger file:logfile=/tmp/uwsgi.log,maxsize=2000000

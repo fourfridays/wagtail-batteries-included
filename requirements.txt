@@ -69,6 +69,8 @@ filetype==1.2.0
     # via willow
 fontawesomefree==6.4.0
     # via -r requirements.in
+gunicorn==20.1.0
+    # via -r requirements.in
 html5lib==1.1
     # via wagtail
 idna==3.4
@@ -125,8 +127,6 @@ urllib3==1.26.15
     #   django-anymail
     #   requests
     #   sentry-sdk
-uwsgi==2.0.21
-    # via -r requirements.in
 wagtail==5.0
     # via -r requirements.in
 webencodings==0.5.1
@@ -135,3 +135,6 @@ whitenoise==6.4.0
     # via -r requirements.in
 willow==1.5
     # via wagtail
+
+# The following packages are considered to be unsafe in a requirements file:
+# setuptools
