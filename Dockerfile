@@ -30,12 +30,12 @@ EXPOSE 8080
 
 # UWSGI
 CMD uwsgi --socket=0.0.0.0:8080 --master --module=wsgi \
-    --processes=3 \                 # number of worker processes
+    --processes=3 \
     --threads=2 \
-    --uid=1000 --gid=2000 \         # if root, uwsgi can drop privileges
-    --harakiri=20 \                 # respawn processes taking more than 20 seconds
-    --max-requests=5000 \           # respawn processes after serving 5000 requests
-    --vacuum \                      # clear environment on exit
-    --daemonize=/var/log/uwsgi/yourproject.log      # background the process
+    --uid=1000 --gid=2000 \
+    --harakiri=20 \
+    --max-requests=5000 \
+    --vacuum \
+    --daemonize=/var/log/uwsgi/yourproject.log \
     --ignore-write-errors \
     --disable-write-exception
