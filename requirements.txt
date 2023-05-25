@@ -69,6 +69,10 @@ filetype==1.2.0
     # via willow
 fontawesomefree==6.4.0
     # via -r requirements.in
+gevent==22.10.2
+    # via -r requirements.in
+greenlet==2.0.2
+    # via gevent
 gunicorn==20.1.0
     # via -r requirements.in
 html5lib==1.1
@@ -135,6 +139,10 @@ whitenoise==6.4.0
     # via -r requirements.in
 willow==1.5
     # via wagtail
+zope-event==4.6
+    # via gevent
+zope-interface==6.0
+    # via gevent
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
