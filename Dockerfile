@@ -29,7 +29,7 @@ RUN python manage.py collectstatic --noinput --clear
 EXPOSE 8080
 
 # UWSGI
-CMD uwsgi --socket=0.0.0.0:8080 --master --module=wsgi \
+CMD uwsgi --http=0.0.0.0:8080 --master --module=wsgi \
     --processes=3 \
     --threads=2 \
     --uid=1000 --gid=2000 \
@@ -37,6 +37,5 @@ CMD uwsgi --socket=0.0.0.0:8080 --master --module=wsgi \
     --max-requests=5000 \
     --vacuum \
     --die-on-term \
-    --daemonize=/var/log/uwsgi/yourproject.log \
     --ignore-write-errors \
     --disable-write-exception
