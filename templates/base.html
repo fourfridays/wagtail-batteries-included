@@ -17,10 +17,11 @@
         {% if self.seo_title == 'Home' %}<link rel="canonical" href="{{ page.full_url }}" />{% endif %}
 
         {# Global stylesheets #}
-        <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" as="style">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" crossorigin="anonymous" media="none" onload="media='all'"><noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" crossorigin="anonymous"></noscript>
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous" async></script>
         
-        <link rel="preload" type="text/css" href="{% static 'css/base.min.css' %}" as="style">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/base.min.css' %}" media="none" onload="media='all'"><noscript><link rel="stylesheet" type="text/css" href="{% static 'css/base.min.css' %}"></noscript
         {% block head-extra %}{% endblock head-extra %}
     </head>
 
