@@ -36,6 +36,7 @@ CMD uwsgi --socket=0.0.0.0:8080 --master --module=wsgi \
     --harakiri=20 \
     --max-requests=5000 \
     --vacuum \
+    --die-on-term \
     --daemonize=/var/log/uwsgi/yourproject.log \
     --ignore-write-errors \
     --disable-write-exception
