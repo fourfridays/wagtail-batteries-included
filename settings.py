@@ -122,13 +122,13 @@ AWS_S3_SECRET_ACCESS_KEY = os.environ.get("AWS_S3_SECRET_ACCESS_KEY", default=No
 AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME", default=None)
 AWS_S3_OBJECT_PARAMETERS = {
     "Expires": "Thu, 31 Dec 2099 20:00:00 GMT",
-    "CacheControl": "max-age=94608000",
-    "ACL": "public-read",
+    "CacheControl": "max-age=94608000"
 }
 AWS_S3_REGION_NAME = os.environ.get("AWS_S3_REGION_NAME", default=None)
 AWS_S3_ENDPOINT_URL = os.environ.get("AWS_S3_ENDPOINT_URL", default=None)
 AWS_S3_FILE_OVERWRITE = False
 AWS_S3_SIGNATURE_VERSION = os.environ.get("AWS_S3_SIGNATURE_VERSION", default="s3v4")
+AWS_DEFAULT_ACL = "public-read"
 
 
 # Static files (CSS, JavaScript, Images)
