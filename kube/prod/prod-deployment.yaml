@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: wbi
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: wbi
@@ -48,44 +48,44 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingress-nginx
+  name: wbi
   annotations:
-    kubernetes.io/ingress.class: "nginx"
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
   rules:
-  - host: wbi.fourfridays.com
-    http:
-      paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: wbi
-              port:
-                number: 8088
-  tls:
-    - hosts:
-        - wbi.fourfridays.com
-      secretName: wbi-tls
-# --- traefik-ingress-deprecated
-# apiVersion: traefik.containo.us/v1alpha1
-# kind: IngressRoute
+    - host: wbi.fourfridays.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: wbi
+                port:
+                  number: 8088
+
+# Deprecating Ingress Nginx due to performance issues
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
 # metadata:
-#   name: app-tls
+#   name: ingress-nginx
 #   annotations:
-#     kubernetes.io/ingress.class: traefik
+#     kubernetes.io/ingress.class: "nginx"
+#     cert-manager.io/cluster-issuer: "letsencrypt-prod"
 # spec:
-#   entryPoints:
-#     - websecure
-#   routes:
-#     - kind: Rule
-#       match: Host(`wbi.fourfridays.com`)
-#       services:
-#         - name: wagtail-batteries-included
-#           port: 8088
-#   tls: # This route uses TLS
-#     secretName: wbi-tls
-#     domains:
-#     - main: wbi.fourfridays.com
-#     certResolver: le # Uses our certificate resolver to get a certificate automatically!
+#   rules:
+#   - host: wbi.fourfridays.com
+#     http:
+#       paths:
+#         - path: /
+#           pathType: Prefix
+#           backend:
+#             service:
+#               name: wbi
+#               port:
+#                 number: 8088
+#   tls:
+#     - hosts:
+#         - wbi.fourfridays.com
+#       secretName: wbi-tls
