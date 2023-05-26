@@ -63,8 +63,6 @@ if sentry_dsn:
         dsn=sentry_dsn,
         before_send=ignore_disallowedhost,
         integrations=[DjangoIntegration()],
-        release=os.environ.get("GIT_COMMIT", "develop"),
-        environment=os.environ.get("STAGE", "local"),
         traces_sample_rate=0.2,
     )
 
