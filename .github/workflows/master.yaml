@@ -88,3 +88,7 @@ jobs:
       - name: 'Deploy to K8s Deployment'
         run: |
           kubectl -n ${{ secrets.K8_NAME_SPACE }} apply -f ./kube/prod/
+
+      - name: 'Restart Kubernetes Deployment'
+        run: |
+          kubectl -n ${{ secrets.K8_NAME_SPACE }} rollout restart deployment ${{ secrets.K8_APP_NAME }}
