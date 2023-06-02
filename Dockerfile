@@ -26,10 +26,10 @@ RUN pip install -U pip pip-tools wheel \
 RUN python manage.py collectstatic --noinput --clear
 
 # Port used by this container to serve HTTP.
-EXPOSE 8080
+EXPOSE 8000
 
 # UWSGI
-CMD uwsgi --http=0.0.0.0:8080 --master --module=wsgi \
+CMD uwsgi --http=0.0.0.0:8000 --master --module=wsgi \
     --processes=3 \
     --threads=2 \
     --uid=1000 --gid=2000 \

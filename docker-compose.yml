@@ -17,7 +17,7 @@ services:
     # different port, for example if you already use port 8000 for
     # something else.
     ports:
-      - "8080:80"
+      - "8000:80"
     volumes:
       - ".:/app:rw"
       - "./data:/data:rw"
