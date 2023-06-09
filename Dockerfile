@@ -12,6 +12,7 @@ RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-r
     libjpeg62-turbo-dev \
     zlib1g-dev \
     libwebp-dev \
+    git \
  && rm -rf /var/lib/apt/lists/*
 
 # set the working directory
@@ -29,13 +30,25 @@ RUN python manage.py collectstatic --noinput --clear
 EXPOSE 8000
 
 # UWSGI
+# See recommendations here: 
+# https://www.bloomberg.com/company/stories/configuring-uwsgi-production-deployment/
 CMD uwsgi --http=0.0.0.0:8000 --master --module=wsgi \
+    --strict \
+    --enable-threads \
+    --single-interpreter \
+    --need-app \
     --processes=3 \
     --threads=2 \
     --uid=1000 --gid=2000 \
-    --harakiri=20 \
+    --harakiri=60 \
     --max-requests=5000 \
+    --max-worker-lifetime=3600 \
+    --reload-on-rss=450 \
+    --worker-reload-mercy=60 \
     --vacuum \
     --die-on-term \
     --ignore-write-errors \
-    --disable-write-exception
+    --disable-write-exception \
+    --disable-logging \
+    --log-4xx \
+    --log-5xx
