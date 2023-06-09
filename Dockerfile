@@ -48,4 +48,7 @@ CMD uwsgi --http=0.0.0.0:8000 --master --module=wsgi \
     --vacuum \
     --die-on-term \
     --ignore-write-errors \
-    --disable-write-exception
+    --disable-write-exception \
+    --disable-logging \
+    --log-4xx \
+    --log-5xx
