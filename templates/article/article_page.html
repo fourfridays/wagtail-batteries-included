@@ -15,7 +15,7 @@
             {% if self.categories.all %}
                 <p><span class="fw-bold">Categories:</span>
                     {% for cat in self.categories.all %}
-                        {{ cat.name }}
+                        <span class="badge bg-secondary">{{ cat.name }}</span>
                     {% endfor %}
                 </p>
             {% endif %}

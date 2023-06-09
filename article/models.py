@@ -22,6 +22,8 @@ from wagtail.models import Page, Orderable
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.snippets.models import register_snippet
 
+from .utils import unique_slugify
+
 from page.blocks import BaseStreamBlock
 
 
@@ -48,7 +50,6 @@ class Author(ClusterableModel):
         null=True,
         blank=True
     )
-
     image = models.ForeignKey(
         "wagtailimages.Image",
         on_delete=models.PROTECT,
@@ -84,11 +85,8 @@ class Author(ClusterableModel):
     def save(self, *args, **kwargs):
         if not self.slug:
             slug = slugify(f"{ self.first_name }-{ self.last_name }")
-            count = Author.objects.filter(slug=slug).count()
-            if count > 0:
-                slug = (f"{ slug }-{ count }")
-            self.slug = slug
-        super().save(*args, **kwargs)
+            unique_slugify(self, slug)
+        return super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = "Author"
@@ -144,11 +142,9 @@ class ArticleCategory(models.Model):
 
     # save model and create unique slug url
     def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
         if not self.slug:
-            slug = slugify(self.name)
-            self.slug = slug
-            self.save()
+            unique_slugify(self, self.name)
+        return super().save(*args, **kwargs)
 
 
 class ArticlePageTag(TaggedItemBase):
