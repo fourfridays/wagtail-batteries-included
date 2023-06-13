@@ -24,8 +24,10 @@ spec:
         - image: ghcr.io/fourfridays/wagtail-batteries-included:latest
           name: wbi
           resources:
+            requests:
+              memory: "256Mi"
             limits:
-              memory: 512Mi
+              memory: "512Mi"
           envFrom:
           - secretRef:
               name: secret
