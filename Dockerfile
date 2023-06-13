@@ -35,16 +35,11 @@ EXPOSE 8000
 CMD uwsgi --http=0.0.0.0:8000 --master --module=wsgi \
     --strict \
     --enable-threads \
-    --single-interpreter \
-    --need-app \
     --processes=3 \
     --threads=2 \
     --uid=1000 --gid=2000 \
     --harakiri=60 \
     --max-requests=5000 \
-    --max-worker-lifetime=3600 \
-    --reload-on-rss=450 \
-    --worker-reload-mercy=60 \
     --vacuum \
     --die-on-term \
     --ignore-write-errors \
