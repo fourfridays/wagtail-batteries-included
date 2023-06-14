@@ -16,7 +16,7 @@ env:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: [self-hosted, Linux, x64, wagtail-batteries-included]
     # runs-on: ubuntu-latest
     permissions:
       contents: read
