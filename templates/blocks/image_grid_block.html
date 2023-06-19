@@ -11,12 +11,12 @@
                             <a class="text-black" href="{% pageurl child.value.link %}">
                         {% endif %}
                         <h4 class="text-white p-2 mb-0"><small>{{ child.value.caption }}</small></h4>
-                        {% image child.value.image fill-400x300-c100 format-webp as webp_grid_image %}
-                        {% image child.value.image fill-400x300-c100 as grid_image %}
+                        {% image child.value.image fill-400x300-c100 format-webp as webp_image_grid %}
+                        {% image child.value.image fill-400x300-c100 as image_grid %}
                         <figure class="overlay">
                             <picture>
-                                <source srcset="{{ webp_grid_image.url }}" type="image/webp">
-                                <img class="card-img img-fluid" src="{{ grid_image.url }}" alt="{{ child.value.image.title }}"/>
+                                <source srcset="{{ webp_image_grid.url }}" type="image/webp">
+                                <img class="card-img img-fluid" {{ image_grid.attrs }}>
                             </picture>
                         </figure>
                         {% if child.value.link %}
