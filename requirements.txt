@@ -128,6 +128,10 @@ urllib3==1.26.15
 uwsgi==2.0.21
     # via -r requirements.in
 wagtail==5.0
+    # via
+    #   -r requirements.in
+    #   wagtailcodeblock
+wagtailcodeblock @ git+https://github.com/fourfridays/wagtailcodeblock.git@d6b4f3b
     # via -r requirements.in
 webencodings==0.5.1
     # via html5lib

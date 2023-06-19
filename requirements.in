@@ -11,3 +11,5 @@ sentry-sdk>=1.22.2,<2.0
 uWSGI>=2.0.21,<2.1
 wagtail>=5.0,<6.0
 whitenoise>=6.4.0,<7.0
+# wagtailcodeblock from fourfridays PR
+git+https://github.com/fourfridays/wagtailcodeblock.git@d6b4f3b#egg=wagtailcodeblock
