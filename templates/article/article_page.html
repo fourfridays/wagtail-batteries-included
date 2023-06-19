@@ -3,9 +3,16 @@
 {% load wagtailimages_tags wagtailcore_tags author_tags %}
 
 {% block content %}
-
-    {% image self.article_image fill-1200x300 as banner %}
-    <img src="{{ banner.url }}" alt="{{ banner.alt }}" style='width: 100%; height: auto;'>
+    {% image page.hero_image fill-2400x658-c100 format-webp as webp_heroimage %}
+    {% image self.article_image fill-2400x658-c100 jpegquality-60 as heroimage %}
+    <div class="hero-image card border-0">
+        <figure>
+            <picture>
+                <source class="img-fluid card-img rounded-0" srcset="{{ webp_heroimage.url }}" type="image/webp">
+                <img class="img-fluid card-img rounded-0" {{ heroimage.attrs }}>
+            </picture>
+        </figure>
+    </div>
 
     <div class="container mt-5 mb-5">
         <div class="text-center">
