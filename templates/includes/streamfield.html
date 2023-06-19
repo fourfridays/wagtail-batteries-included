@@ -31,12 +31,12 @@
 
         <!-- ALIGNED IMAGE -->
         {% elif child.block_type == 'image' %}
-            {% image child.value.image width-900 format-webp as webp_theimage %}
-            {% image child.value.image width-900 as theimage %}
+            {% image child.value.image fill-900-c100 format-webp as webp_aligned_image %}
+            {% image child.value.image fill-900-c100 as aligned_image %}
             <figure>
                 <picture>
-                    <source srcset="{{ webp_theimage.url }}" type="image/webp">
-                    <img class="img-fluid img-thumbnail{% if child.value.image_alignment != 'center' %} float-{{ child.value.image_alignment }} {% else %} mx-auto d-block{% endif %}" src="{{ theimage.url }}" width="{{ theimage.width }}" height="{{ theimage.height }}" alt="{{ theimage.alt }}" />
+                    <source srcset="{{ webp_aligned_image.url }}" type="image/webp">
+                    <img class="img-fluid img-thumbnail{% if child.value.image_alignment != 'center' %} float-{{ child.value.image_alignment }} {% else %} mx-auto d-block{% endif %}" {{ aligned_image.attrs }}>
                 </picture>
             </figure>
 

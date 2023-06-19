@@ -2,11 +2,11 @@
 
 {% image self.hero_image fill-2400x658-c100 format-webp as webp_heroimage %}
 {% image self.hero_image fill-2400x658-c100 as heroimage %}
-<div class="hero-image">
+<div class="hero-image card border-0">
     <figure>
         <picture>
-            <source srcset="{{ webp_heroimage.url }}" type="image/webp">
-            <img class="img-fluid" src="{{ heroimage.url }}" alt="{{ self.hero_image.title }}"/>
+            <source class="img-fluid card-img rounded-0" srcset="{{ webp_heroimage.url }}" type="image/webp">
+            <img class="img-fluid card-img rounded-0" {{ heroimage.attrs }}>
         </picture>
         {% if self.hero_heading or self.hero_caption or self.hero_photo_credit %}
             <figcaption class="p-3">
