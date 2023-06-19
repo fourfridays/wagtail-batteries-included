@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "wagtail",
     "modelcluster",
     "taggit",
+
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -178,6 +179,15 @@ SECRET_KEY = os.environ.get("SECRET_KEY", default="<a string of random character
 
 # Custom User model
 AUTH_USER_MODEL = "users.User"
+
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
+
+# Make low-quality but small images
+WAGTAILIMAGES_JPEG_QUALITY = 40
+WAGTAILIMAGES_WEBP_QUALITY = 45
+WAGTAIL_ENABLE_WHATS_NEW_BANNER = False
+WAGTAILEMBEDS_FINDERS = [{"class": "wagtail.embeds.finders.oembed"}]
+
 # wagtailcodeblock
 WAGTAIL_CODE_BLOCK_LINE_NUMBERS = False
 WAGTAIL_CODE_BLOCK_THEME = "tomorrow"
