@@ -12,6 +12,8 @@ INSTALLED_APPS = [
     "page",
     "fontawesomefree",
     "users",
+    "wagtailcodeblock",
+
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.contrib.routable_page",
@@ -176,3 +178,6 @@ SECRET_KEY = os.environ.get("SECRET_KEY", default="<a string of random character
 
 # Custom User model
 AUTH_USER_MODEL = "users.User"
+# wagtailcodeblock
+WAGTAIL_CODE_BLOCK_LINE_NUMBERS = False
+WAGTAIL_CODE_BLOCK_THEME = "tomorrow"
