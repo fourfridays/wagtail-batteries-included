@@ -69,6 +69,32 @@ spec:
                 name: wbi
                 port:
                   number: 8088
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: wbi-tls
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`wbi.fourfridays.com`)
+      middlewares:
+        - name: wbi-gzip-compress
+      services:
+        - name: wbi
+          port: 8088
+  tls: # This route uses TLS
+    certResolver: le # Uses our certificate resolver to get a certificate automatically!
+---
+# Enable gzip compression
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: wbi-gzip-compress
+spec:
+  compress: {}
 
 # Deprecating Ingress Nginx due to performance issues
 # apiVersion: networking.k8s.io/v1
