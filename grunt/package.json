@@ -1,20 +1,20 @@
 {
-  "name": "Umair Abbasi",
-  "version": "1.0.0",
-  "description": "Package file for wagtail batteries inclded website hosted at https://wbi.fourfridays.com",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Umair Abbasi",
-  "license": "ISC",
-  "devDependencies": {
-    "grunt": "^1.6.1",
-    "grunt-contrib-concat": "^2.1.0",
-    "grunt-contrib-cssmin": "^5.0.0",
-    "grunt-contrib-jshint": "^3.2.0",
-    "grunt-contrib-sass": "^1.0.0",
-    "grunt-contrib-uglify": "^5.2.2",
-    "grunt-contrib-watch": "^1.1.0"
-  }
+    "name": "Umair Abbasi",
+    "version": "1.0.0",
+    "description": "Package file for wagtail batteries inclded website hosted at https://wbi.fourfridays.com",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Umair Abbasi",
+    "license": "ISC",
+    "devDependencies": {
+        "grunt": "^1.6.1",
+        "grunt-contrib-concat": "^2.1.0",
+        "grunt-contrib-cssmin": "^5.0.0",
+        "grunt-contrib-jshint": "^3.2.0",
+        "grunt-contrib-sass": "^1.0.0",
+        "grunt-contrib-uglify": "^5.2.2",
+        "grunt-contrib-watch": "^1.1.0"
+    }
 }
